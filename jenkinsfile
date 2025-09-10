@@ -11,9 +11,7 @@ pipeline {
                 sh 'mvn clean deploy'
             }
         }    
-    }
-
-    stages {
+       
         stage("sonarqube-scan") {
             environment {
             scannerHome = tool 'roshan-sonar-scanner'
@@ -21,6 +19,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('roshan-sonarqube-server') {
                     sh "${scannerHome}/bin/sonar-scanner"
+                }
             }
         }
     }
